@@ -28,4 +28,11 @@ button{font-weight: bold;}
 ._input:focus{
     background-color: #fdfcff80 !important;
 }
-.question{margin-bottom: 1rem;display: block; border-left: 0.2rem solid var(--p);padding: 1rem;}
+.question{
+    margin: 2rem 0;
+    display: block; 
+    border-left: 0.2rem solid var(--p);
+    padding: 1rem;
+    background-color: #f7f7f7;
+    color: #7450FF !important;
+}
