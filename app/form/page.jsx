@@ -8,24 +8,260 @@ import SectionUI from '@/ui/section'
 import TextUi from '@/ui/Text'
 import Aos from 'aos'
 import React, { useState, useEffect} from 'react'
-import { PiArrowRight } from 'react-icons/pi'
-
-
+import { PiArrowRight, PiPaperPlane, PiX } from 'react-icons/pi'
+import {FunGet} from 'funuicss/js/Fun'
+import Axios from 'axios'
+import Alert from 'funuicss/ui/alert/Alert'
+import Loader from '@/ui/Loader'
+import Modal from 'funuicss/ui/modal/Modal'
+import Preview from '../preview/page'
 
 export default function Form() {
     const [page, setpage] = useState(1)
     const [total_pages, settotal_pages] = useState(2)
+    const [data_rate, setdata_rate] = useState(null)
+    const [loading, setloading] = useState(false)
+    const [status, setstatus] = useState('')
+    const [message, setmessage] = useState('')
+    const [modal, setmodal] = useState(false)
+    const [data, setdata] = useState('')
+    const [participated_in_hackaton, setparticipated_in_hackaton] = useState('No')
 
+    useEffect(() => {
+      setTimeout(() => {
+        setstatus(false)
+      }, 4000);
+    
+      return () => {
+        clearTimeout()
+      }
+    }, [status])
+    
 
+    const confirmation = () => {
+        setloading(true)
+        Axios.post('https://id-card-pvj6.onrender.com/register' , data)
+        .then(() => {
+          setloading(false)
+          setstatus('success')
+          setmessage('Form submitted successfully!')
+          setTimeout(() => {
+            window.location.assign('/success')
+          }, 4000);
+        })
+        .catch(err => {
+          setloading(false)
+          setstatus('warning')
+          setmessage(JSON.stringify(err.message))
+                })  
+    }
     const Submit = () => {
         if(page < total_pages){
             setpage(page + 1)
         }else{
+
             // submit the data
+            let team_name,
+            university,
+            field_of_study,
+            level_of_study,
+            lead_full_name,
+            lead_email,
+            lead_phone_number,
+            lead_age,
+            lead_gender,
+            member_1_name,
+            member_1_education_level,
+            member_1_gender,
+            member_2_name,
+            member_2_education_level,
+            member_2_gender,
+            member_3_name,
+            member_3_education_level,
+            member_3_gender,
+            member_4_name,
+            member_4_education_level,
+            member_4_gender,
+            member_5_name,
+            member_5_education_level,
+            member_5_gender,
+            proficiency_r,
+            proficiency_python,
+            proficiency_javascript,
+            proficiency_other,
+            proficiency_sas,
+            proficiency_spss,
+            proficiency_stata,
+            proficiency_excel,
+            proficiency_julia,
+            visualization_experience,
+            previous_hackathon,
+            previous_experience,
+            expectations,
+            campus_availability,
+            national_availability,
+            time_constraints 
+
+            team_name = FunGet.val('#team_name')
+            university = FunGet.val('#university')
+            field_of_study = FunGet.val('#field_of_study')
+            level_of_study = FunGet.val('#level_of_study')
+            lead_full_name = FunGet.val('#lead_full_name')
+            lead_email = FunGet.val('#lead_email')
+            lead_phone_number = FunGet.val('#lead_phone_number')
+            lead_age = FunGet.val('#lead_age')
+            lead_gender = FunGet.val('#lead_gender')
+            member_1_name = FunGet.val('#member_1_name')
+            member_1_education_level = FunGet.val('#member_1_education_level')
+            member_1_gender = FunGet.val('#member_1_gender')
+            member_2_name = FunGet.val('#member_2_name')
+            member_2_education_level = FunGet.val('#member_2_education_level')
+            member_2_gender = FunGet.val('#member_2_gender')
+            member_3_name = FunGet.val('#member_3_name')
+            member_3_education_level = FunGet.val('#member_3_education_level')
+            member_3_gender = FunGet.val('#member_3_gender')
+            member_4_name = FunGet.val('#member_4_name')
+            member_4_education_level = FunGet.val('#member_4_education_level')
+            member_4_gender = FunGet.val('#member_4_gender')
+            member_5_name = FunGet.val('#member_5_name')
+            member_5_education_level = FunGet.val('#member_5_education_level')
+            member_5_gender = FunGet.val('#member_5_gender')
+            proficiency_r = FunGet.val('#proficiency_r')
+            proficiency_python = FunGet.val('#proficiency_python')
+            proficiency_javascript = FunGet.val('#proficiency_javascript')
+            proficiency_other = FunGet.val('#proficiency_other')
+            proficiency_sas = FunGet.val('#proficiency_sas')
+            proficiency_spss = FunGet.val('#proficiency_spss')
+            proficiency_stata = FunGet.val('#proficiency_stata')
+            proficiency_excel = FunGet.val('#proficiency_excel')
+            proficiency_julia = FunGet.val('#proficiency_julia')
+            visualization_experience = data_rate
+            previous_hackathon = FunGet.val('#previous_hackathon')
+            previous_experience = participated_in_hackaton == 'Yes' ? FunGet.val('#previous_experience') : ''
+            expectations = participated_in_hackaton == 'Yes' ?  FunGet.val('#expectations')  : ''
+            campus_availability = participated_in_hackaton == 'Yes' ?  FunGet.val('#campus_availability')  : 'No'
+            national_availability = participated_in_hackaton == 'Yes' ?  FunGet.val('#national_availability')  : 'No'
+            time_constraints = participated_in_hackaton == 'Yes' ?  FunGet.val('#time_constraints')  : 'No'
+            // send data to server
+            
+        let doc = {
+            team_name,
+            university,
+            field_of_study,
+            level_of_study,
+            lead_full_name,
+            lead_email,
+            lead_phone_number,
+            lead_age,
+            lead_gender,
+            member_1_name,
+            member_1_education_level,
+            member_1_gender,
+            member_2_name,
+            member_2_education_level,
+            member_2_gender,
+            member_3_name,
+            member_3_education_level,
+            member_3_gender,
+            member_4_name,
+            member_4_education_level,
+            member_4_gender,
+            member_5_name,
+            member_5_education_level,
+            member_5_gender,
+            proficiency_r,
+            proficiency_python,
+            proficiency_javascript,
+            proficiency_other,
+            proficiency_sas,
+            proficiency_spss,
+            proficiency_stata,
+            proficiency_excel,
+            proficiency_julia,
+            visualization_experience,
+            previous_hackathon,
+            previous_experience,
+            expectations,
+            campus_availability,
+            national_availability,
+            time_constraints 
         }
+
+        console.log(doc)
+        if( 
+
+            team_name  &&
+            university  &&
+            field_of_study  &&
+            level_of_study  &&
+            lead_full_name  &&
+            lead_email  &&
+            lead_phone_number  &&
+            lead_age  &&
+            lead_gender  &&
+            member_1_name  &&
+            member_1_education_level  &&
+            member_1_gender  &&
+            member_2_name  &&
+            member_2_education_level  &&
+            member_2_gender  &&
+            member_3_name  &&
+            member_3_education_level  &&
+            member_3_gender  &&
+            member_4_name  &&
+            member_4_education_level  &&
+            member_4_gender  &&
+            member_5_name  &&
+            member_5_education_level  &&
+            member_5_gender  &&
+            proficiency_r  &&
+            proficiency_python  &&
+            proficiency_javascript  &&
+            proficiency_other  &&
+            proficiency_sas  &&
+            proficiency_spss  &&
+            proficiency_stata  &&
+            proficiency_excel  &&
+            proficiency_julia  &&
+            visualization_experience  &&
+            previous_hackathon 
+        ){
+          setdata(doc) 
+          setmodal(true)
+
+        }else{
+            setstatus('warning')
+            setmessage('Please fill in all required fields!')
+        }
+                
+                
+                }
     }
   return (
     <div className="container">
+        <Modal
+        open={modal}
+        maxWidth={'800px'}
+        title={<TextUi heading='h4' text='Review' />}
+        funcss='card'
+        footer={<RowFlexUi gap={2} justify="flex-end">
+              <UiButton bold text="No, Don't Submit" color='s'  onClick={() => setmodal(false)} endIcon={<PiX />}/>
+              <UiButton bold text="Yes Submit" bg='p' raised onClick={confirmation} endIcon={<PiPaperPlane />}/>
+        </RowFlexUi>}
+        body={<>
+        <div className="height-400-max fit">
+        <Preview data={data} />
+        </div>
+        </>}
+        />
+
+
+        {
+            loading && <Loader />
+        }
+        {
+            status && <Alert type={status} message={message} fixed='top-middle' animation='SlideDown' standard/>
+        }
         <div className='width-600-max fit center padding-top-50'>
         <RowFlexUi gap={1} >
             <CircleUi bg='dark900' size={4}>
@@ -69,6 +305,16 @@ export default function Form() {
         {
                 page == 2 && 
                 <div>
+                <QWrapper q="">
+                <TextUi 
+                text={`Team Name`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi label={'Select Answer'} id='team_name'/>
+                </SectionUI>
+                </QWrapper>
                 <QWrapper q="1">
                 <TextUi 
                 text={`Full name of team lead`}
@@ -76,7 +322,10 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='lead_full_name'/>
+                </SectionUI>
+                <SectionUI>
+                    <div className="error-message" id='error-lead_full_name'></div>
                 </SectionUI>
                 </QWrapper>
 
@@ -87,7 +336,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='lead_email' />
                 </SectionUI>
                 </QWrapper>
 
@@ -98,7 +347,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='lead_phone_number'/>
                 </SectionUI>
                 </QWrapper>
 
@@ -109,18 +358,18 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi type='number'/>
+                <InputUi type='number' id='lead_age'/>
                 </SectionUI>
                 </QWrapper>
 
                 <QWrapper q='5'>
                 <TextUi 
-                text={`Gender  of team lead`}
+                text={`Gender  of team leader`}
                 heading='h6'
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi select options={[
+                <InputUi id='lead_gender' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'MALE' , 'value':'MALE'} ,
                     {'text':'FEMALE' , 'value':'FEMALE'} ,
@@ -135,7 +384,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id="university" />
                 </SectionUI>
                 </QWrapper>
 
@@ -146,7 +395,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='field_of_study'/>
                 </SectionUI>
                 </QWrapper>
 
@@ -157,7 +406,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi select options={[
+                <InputUi id='level_of_study' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'HND' , 'value':'HND'} ,
                     {'text':'Diploma' , 'value':'Diploma'} ,
@@ -177,7 +426,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='member_1_name'/>
                 </SectionUI>
                 </QWrapper>
 
@@ -188,7 +437,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='member_2_name'/>
                 </SectionUI>
                 </QWrapper>
                 
@@ -199,7 +448,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='member_3_name'/>
                 </SectionUI>
                 </QWrapper>
 
@@ -210,7 +459,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='member_4_name'/>
                 </SectionUI>
                 </QWrapper>
 
@@ -221,7 +470,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='member_5_name' />
                 </SectionUI>
                 </QWrapper>
 
@@ -235,7 +484,7 @@ export default function Form() {
                         <SectionUI gap={1}>
                 <RowFlexUi gap={1}>
                      <div className="col">
-                     <InputUi label={"Member 3"} select options={[
+                     <InputUi label={"Member 1"} id='member_1_education_level' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'HND' , 'value':'HND'} ,
                     {'text':'Diploma' , 'value':'Diploma'} ,
@@ -247,7 +496,7 @@ export default function Form() {
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"Member 4"} select options={[
+                     <InputUi label={"Member 2"} id='member_2_education_level' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'HND' , 'value':'HND'} ,
                     {'text':'Diploma' , 'value':'Diploma'} ,
@@ -259,7 +508,7 @@ export default function Form() {
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"Member 5"} select options={[
+                     <InputUi label={"Member 3"} id='member_3_education_level' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'HND' , 'value':'HND'} ,
                     {'text':'Diploma' , 'value':'Diploma'} ,
@@ -275,7 +524,7 @@ export default function Form() {
                 <SectionUI gap={1}>
                 <RowFlexUi gap={1}>
                      <div className="col">
-                     <InputUi label={"Member 1"} select options={[
+                     <InputUi label={"Member 4"} id='member_4_education_level' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'HND' , 'value':'HND'} ,
                     {'text':'Diploma' , 'value':'Diploma'} ,
@@ -287,7 +536,7 @@ export default function Form() {
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"Member 2"} select options={[
+                     <InputUi label={"Member 5"} id='member_5_education_level' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'HND' , 'value':'HND'} ,
                     {'text':'Diploma' , 'value':'Diploma'} ,
@@ -304,28 +553,28 @@ export default function Form() {
                 </QWrapper>
                 <QWrapper q='15'>
                 <TextUi 
-                text={'Sex of team members'}
+                text={'Gender of team members'}
                 heading='h6'
                 funcss='question'
                 />
                   <SectionUI gap={1}>
                 <RowFlexUi gap={1}>
                      <div className="col">
-                     <InputUi label={"Member 3"} select options={[
+                     <InputUi id='member_1_gender' label={"Member 1"} select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'MALE' , 'value':'MALE'} ,
                     {'text':'FEMALE' , 'value':'FEMALE'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"Member 4"} select options={[
+                     <InputUi label={"Member 2"} id='member_2_gender' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'MALE' , 'value':'MALE'} ,
                     {'text':'FEMALE' , 'value':'FEMALE'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"Member 5"} select options={[
+                     <InputUi label={"Member 3"} id='member_3_gender' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'MALE' , 'value':'MALE'} ,
                     {'text':'FEMALE' , 'value':'FEMALE'} ,
@@ -336,14 +585,14 @@ export default function Form() {
                 <SectionUI gap={1}>
                 <RowFlexUi gap={1}>
                      <div className="col">
-                     <InputUi label={"Member 1"} select options={[
+                     <InputUi label={"Member 4"} id='member_4_gender' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'MALE' , 'value':'MALE'} ,
                     {'text':'FEMALE' , 'value':'FEMALE'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"Member 2"} select options={[
+                     <InputUi label={"Member 5"} id='member_5_gender' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'MALE' , 'value':'MALE'} ,
                     {'text':'FEMALE' , 'value':'FEMALE'} ,
@@ -363,33 +612,33 @@ export default function Form() {
                 <SectionUI gap={1}>
                 <RowFlexUi gap={1}>
                      <div className="col">
-                     <InputUi label={"R"} select options={[
+                     <InputUi id='proficiency_r' label={"R"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"PYTHON"} select options={[
+                     <InputUi id='proficiency_python' label={"PYTHON"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"JAVASCRIPT"} select options={[
+                     <InputUi id='proficiency_javascript' label={"JAVASCRIPT"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
                     </RowFlexUi>
@@ -403,7 +652,7 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi label={'Select Answer'} />
+                <InputUi label={'Select Answer'} id='proficiency_other' />
                 </SectionUI>
                 </QWrapper>
 
@@ -416,33 +665,33 @@ export default function Form() {
                 <SectionUI gap={1}>
                     <RowFlexUi gap={1}>
                      <div className="col">
-                     <InputUi label={"SAS"} select options={[
+                     <InputUi id='proficiency_sas' label={"SAS"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"SPSS"} select options={[
+                     <InputUi id='proficiency_spss' label={"SPSS"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"STATA"} select options={[
+                     <InputUi id='proficiency_stata' label={"STATA"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
                     </RowFlexUi>
@@ -450,23 +699,23 @@ export default function Form() {
                 <SectionUI gap={1}>
                     <RowFlexUi gap={1}>
                      <div className="col">
-                     <InputUi label={"EXCEL"} select options={[
+                     <InputUi id='proficiency_excel' label={"EXCEL"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
                      <div className="col">
-                     <InputUi label={"JULIA"} select options={[
+                     <InputUi id='proficiency_julia' label={"JULIA"} select options={[
                     {'text':'Select' , 'value':''} ,
-                    {'text':'Interest' , 'value':'Yes'} ,
-                    {'text':'Beginner' , 'value':'No'} ,
-                    {'text':'Intermediate' , 'value':'No'} ,
-                    {'text':'Advanced' , 'value':'No'} ,
-                    {'text':'Power User' , 'value':'No'} ,
+                    {'text':'Interest' , 'value':'Interest'} ,
+                    {'text':'Beginner' , 'value':'Beginner'} ,
+                    {'text':'Intermediate' , 'value':'Intermediate'} ,
+                    {'text':'Advanced' , 'value':'Advanced'} ,
+                    {'text':'Power User' , 'value':'Power User'} ,
                 ]} />
                      </div>
              
@@ -482,34 +731,34 @@ export default function Form() {
                 />
                 <SectionUI gap={1}>
                 <RowFlexUi gap={0.5}>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi onClick={ ()  => setdata_rate(1)} size={2} bg={ data_rate == 1 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         1
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(2)}  size={2} bg={ data_rate == 2 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         2
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(3)}  size={2} bg={ data_rate == 3 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         3
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(4)}  size={2} bg={ data_rate == 4 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         4
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(5)}  size={2} bg={ data_rate == 5 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         5
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(6)}  size={2} bg={ data_rate == 6 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         6
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(7)}  size={2} bg={ data_rate == 7 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         7
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(8)}  size={2} bg={ data_rate == 8 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         8
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(9)}  size={2} bg={ data_rate == 9 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         9
                     </CircleUi>
-                    <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
+                    <CircleUi  onClick={ ()  => setdata_rate(10)}  size={2} bg={ data_rate == 10 ? 'primary' : 'dark900'} funcss='hover-primary pointer text-dark'>
                         10
                     </CircleUi>
                 </RowFlexUi>
@@ -523,16 +772,83 @@ export default function Form() {
                 funcss='question'
                 />
                 <SectionUI gap={1}>
-                <InputUi select options={[
+                <InputUi onChange={(e) => setparticipated_in_hackaton(e.target.value)} id='previous_hackathon' select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'Yes' , 'value':'Yes'} ,
                     {'text':'No' , 'value':'No'} ,
                 ]}/>
                 </SectionUI>
                 </QWrapper>
+                
+               {
+                participated_in_hackaton == 'Yes' &&
+                <>
+                 <QWrapper q='21'>
+                <TextUi 
+                text={`Please describe your previous experience and achievements`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi id='previous_experience' multiline rows={5} label={'Select Answer'} />
+                </SectionUI>
+                </QWrapper>
 
-      
+                <QWrapper q='22'>
+                <TextUi 
+                text={`What are your expectations for this hackathon`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi
+                id='expectations'
+                 multiline rows={5} label={'Select Answer'} />
+                </SectionUI>
+                </QWrapper>
 
+                <QWrapper q={'23'}>
+                <TextUi 
+                text={`Are you available for the campus hackathon within the month of September?`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi id='campus_availability' select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'Yes' , 'value':'Yes'} ,
+                    {'text':'No' , 'value':'No'} ,
+                ]}/>
+                </SectionUI>
+                </QWrapper>
+                
+                <QWrapper q={'24'}>
+                <TextUi 
+                text={`Are you available for the national hackathon within the month of October?`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi id='national_availability' select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'Yes' , 'value':'Yes'} ,
+                    {'text':'No' , 'value':'No'} ,
+                ]}/>
+                </SectionUI>
+                </QWrapper>
+                
+                <QWrapper q='25'>
+                <TextUi 
+                text={`Any specific time constraints?`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi label={'Select Answer'} id='time_constraints' />
+                </SectionUI>
+                </QWrapper>
+                </>
+               }
 
                 </div>
         }
