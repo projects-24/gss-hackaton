@@ -11,114 +11,11 @@ import React, { useState, useEffect} from 'react'
 import { PiArrowRight } from 'react-icons/pi'
 
 
-const data = [
-    {
-        'question':'Full name of team lead',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Email address  of team lead',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Phone number  of team lead',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Gender  of team lead',
-        'options':['male','female', 'Non-Binary', 'Prefer not to say'],
-        'answer':null
-    }
-    ,
-    {
-        'question':'Name of University /Insitution',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Field of study',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'What level are you currently in ',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Name of team member 1',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Name of team member 2',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Name of team member 3',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Name of team member 4',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Name of team member 5',
-        'options':null,
-        'answer':null
-    }
-
-    ,
-    {
-        'question':'Proficiency in Programming languages across team members',
-        'options': null,
-        'answer':null
-    },
-    ,
-    {
-        'question':'Other programming languages',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Other data analysis tools and proficiency( Interest, Beginner, Intermediate, Advanced, Power User)',
-        'options':null,
-        'answer':null
-    }
-    ,
-    {
-        'question':'Rate your experience with data visualisation tools',
-        'options':null,
-        'answer':null
-    } ,
-    {
-        'question':'Have you participated in a hackathon before?',
-        'options':['Yes', 'No'],
-        'answer':null
-    },
-]
 
 export default function Form() {
     const [page, setpage] = useState(1)
     const [total_pages, settotal_pages] = useState(2)
-
+    
 
     const Submit = () => {
         if(page < total_pages){
@@ -172,46 +69,57 @@ export default function Form() {
         {
                 page == 2 && 
                 <div>
-                <QWrapper>
+                <QWrapper q="1">
                 <TextUi 
-                text={data[0].question}
+                text={`Full name of team lead`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='2'>
                 <TextUi 
-                text={data[1].question}
+                text={`Email address  of team lead`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='3'>
                 <TextUi 
-                text={data[2].question}
+                text={`Phone number  of team lead`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='4'>
                 <TextUi 
-                text={data[3].question}
+                text={`Age  of team lead`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
+                <InputUi type='number'/>
+                </SectionUI>
+                </QWrapper>
+
+                <QWrapper q='5'>
+                <TextUi 
+                text={`Gender  of team lead`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
                 <InputUi select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'MALE' , 'value':'MALE'} ,
@@ -220,35 +128,35 @@ export default function Form() {
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='6'>
                 <TextUi 
-                text={data[4].question}
+                text={`Name of University /Insitution`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='7'>
                 <TextUi 
-                text={data[5].question}
+                text={`Field of study`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='8'>
                 <TextUi 
-                text={data[6].question}
+                text={`What level are you currently in `}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'HND' , 'value':'HND'} ,
@@ -262,69 +170,197 @@ export default function Form() {
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='9'>
                 <TextUi 
-                text={data[7].question}
+                text={`Name of team member 1`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='10'>
                 <TextUi 
-                text={data[8].question}
+                text={`Name of team member 2`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
                 
-                <QWrapper>
+                <QWrapper q='11'>
                 <TextUi 
-                text={data[9].question}
+                text={`Name of team member 3`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='12'>
                 <TextUi 
-                text={data[10].question}
+                text={`Name of team member 4`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='13'>
                 <TextUi 
-                text={data[11].question}
+                text={`Name of team member 5`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
 
-                <QWrapper>
+                <QWrapper q='14'>
                 <TextUi 
-                text={data[12].question}
+                text={'Education level of team members'}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                        <SectionUI gap={1}>
+                <RowFlexUi gap={1}>
+                     <div className="col">
+                     <InputUi label={"Member 3"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'HND' , 'value':'HND'} ,
+                    {'text':'Diploma' , 'value':'Diploma'} ,
+                    {'text':'Undergraduate level 100' , 'value':'Undergraduate level 100'} ,
+                    {'text':'Undergraduate level 200' , 'value':'Undergraduate level 200'} ,
+                    {'text':'Undergraduate level 300' , 'value':'Undergraduate level 300'} ,
+                    {'text':'Masters' , 'value':'Masters'} ,
+                    {'text':'PhD' , 'value':'PhD'} ,
+                ]} />
+                     </div>
+                     <div className="col">
+                     <InputUi label={"Member 4"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'HND' , 'value':'HND'} ,
+                    {'text':'Diploma' , 'value':'Diploma'} ,
+                    {'text':'Undergraduate level 100' , 'value':'Undergraduate level 100'} ,
+                    {'text':'Undergraduate level 200' , 'value':'Undergraduate level 200'} ,
+                    {'text':'Undergraduate level 300' , 'value':'Undergraduate level 300'} ,
+                    {'text':'Masters' , 'value':'Masters'} ,
+                    {'text':'PhD' , 'value':'PhD'} ,
+                ]} />
+                     </div>
+                     <div className="col">
+                     <InputUi label={"Member 5"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'HND' , 'value':'HND'} ,
+                    {'text':'Diploma' , 'value':'Diploma'} ,
+                    {'text':'Undergraduate level 100' , 'value':'Undergraduate level 100'} ,
+                    {'text':'Undergraduate level 200' , 'value':'Undergraduate level 200'} ,
+                    {'text':'Undergraduate level 300' , 'value':'Undergraduate level 300'} ,
+                    {'text':'Masters' , 'value':'Masters'} ,
+                    {'text':'PhD' , 'value':'PhD'} ,
+                ]} />
+                     </div>
+                    </RowFlexUi>
+                </SectionUI>
+                <SectionUI gap={1}>
+                <RowFlexUi gap={1}>
+                     <div className="col">
+                     <InputUi label={"Member 1"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'HND' , 'value':'HND'} ,
+                    {'text':'Diploma' , 'value':'Diploma'} ,
+                    {'text':'Undergraduate level 100' , 'value':'Undergraduate level 100'} ,
+                    {'text':'Undergraduate level 200' , 'value':'Undergraduate level 200'} ,
+                    {'text':'Undergraduate level 300' , 'value':'Undergraduate level 300'} ,
+                    {'text':'Masters' , 'value':'Masters'} ,
+                    {'text':'PhD' , 'value':'PhD'} ,
+                ]} />
+                     </div>
+                     <div className="col">
+                     <InputUi label={"Member 2"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'HND' , 'value':'HND'} ,
+                    {'text':'Diploma' , 'value':'Diploma'} ,
+                    {'text':'Undergraduate level 100' , 'value':'Undergraduate level 100'} ,
+                    {'text':'Undergraduate level 200' , 'value':'Undergraduate level 200'} ,
+                    {'text':'Undergraduate level 300' , 'value':'Undergraduate level 300'} ,
+                    {'text':'Masters' , 'value':'Masters'} ,
+                    {'text':'PhD' , 'value':'PhD'} ,
+                ]} />
+                     </div>
+                    </RowFlexUi>
+                </SectionUI>
+        
+                </QWrapper>
+                <QWrapper q='15'>
+                <TextUi 
+                text={'Sex of team members'}
+                heading='h6'
+                funcss='question'
+                />
+                  <SectionUI gap={1}>
+                <RowFlexUi gap={1}>
+                     <div className="col">
+                     <InputUi label={"Member 3"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'MALE' , 'value':'MALE'} ,
+                    {'text':'FEMALE' , 'value':'FEMALE'} ,
+                ]} />
+                     </div>
+                     <div className="col">
+                     <InputUi label={"Member 4"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'MALE' , 'value':'MALE'} ,
+                    {'text':'FEMALE' , 'value':'FEMALE'} ,
+                ]} />
+                     </div>
+                     <div className="col">
+                     <InputUi label={"Member 5"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'MALE' , 'value':'MALE'} ,
+                    {'text':'FEMALE' , 'value':'FEMALE'} ,
+                ]} />
+                     </div>
+                    </RowFlexUi>
+                </SectionUI>
+                <SectionUI gap={1}>
+                <RowFlexUi gap={1}>
+                     <div className="col">
+                     <InputUi label={"Member 1"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'MALE' , 'value':'MALE'} ,
+                    {'text':'FEMALE' , 'value':'FEMALE'} ,
+                ]} />
+                     </div>
+                     <div className="col">
+                     <InputUi label={"Member 2"} select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'MALE' , 'value':'MALE'} ,
+                    {'text':'FEMALE' , 'value':'FEMALE'} ,
+                ]} />
+                     </div>
+                    </RowFlexUi>
+                </SectionUI>
+              
+                </QWrapper>
+
+                <QWrapper q='16'>
+                <TextUi 
+                text={`Proficiency in Programming languages across team members`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
                 <RowFlexUi gap={1}>
                      <div className="col">
                      <InputUi label={"R"} select options={[
@@ -360,36 +396,24 @@ export default function Form() {
                 </SectionUI>
                 </QWrapper>
 
-{/*                 
-                <QWrapper>
+                <QWrapper q='17'>
                 <TextUi 
-                text={data[13].question}
+                text={`Other programming languages`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
-                <InputUi label={'Select Answer'} />
-                </SectionUI>
-                </QWrapper> */}
-
-                <QWrapper>
-                <TextUi 
-                text={data[14].question}
-                heading='h6'
-                funcss='question'
-                />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi label={'Select Answer'} />
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='18'>
                 <TextUi 
-                text={data[15].question}
+                text={`Other data analysis tools and proficiency( Interest, Beginner, Intermediate, Advanced, Power User)`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                     <RowFlexUi gap={1}>
                      <div className="col">
                      <InputUi label={"SAS"} select options={[
@@ -423,7 +447,7 @@ export default function Form() {
                      </div>
                     </RowFlexUi>
                 </SectionUI>
-                <SectionUI>
+                <SectionUI gap={1}>
                     <RowFlexUi gap={1}>
                      <div className="col">
                      <InputUi label={"EXCEL"} select options={[
@@ -450,13 +474,13 @@ export default function Form() {
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q='19'>
                 <TextUi 
-                text={data[16].question}
+                text={`Rate your experience with data visualisation tools`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <RowFlexUi gap={0.5}>
                     <CircleUi size={1.5} bg={'dark900'} funcss='hover-primary pointer text-dark border'>
                         1
@@ -492,13 +516,13 @@ export default function Form() {
                 </SectionUI>
                 </QWrapper>
 
-                <QWrapper>
+                <QWrapper q={'20'}>
                 <TextUi 
-                text={data[17].question}
+                text={`Have you participated in a hackathon before?`}
                 heading='h6'
                 funcss='question'
                 />
-                <SectionUI>
+                <SectionUI gap={1}>
                 <InputUi select options={[
                     {'text':'Select' , 'value':''} ,
                     {'text':'Yes' , 'value':'Yes'} ,
@@ -506,9 +530,69 @@ export default function Form() {
                 ]}/>
                 </SectionUI>
                 </QWrapper>
+                
+                <QWrapper q='21'>
+                <TextUi 
+                text={`Please describe your previous experience and achievements`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi label={'Select Answer'} />
+                </SectionUI>
+                </QWrapper>
 
-      
+                <QWrapper q='22'>
+                <TextUi 
+                text={`What are your expectations for this hackathon`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi label={'Select Answer'} />
+                </SectionUI>
+                </QWrapper>
 
+                <QWrapper q={'23'}>
+                <TextUi 
+                text={`Are you available for the campus hackathon within the month of September?`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'Yes' , 'value':'Yes'} ,
+                    {'text':'No' , 'value':'No'} ,
+                ]}/>
+                </SectionUI>
+                </QWrapper>
+                
+                <QWrapper q={'24'}>
+                <TextUi 
+                text={`Are you available for the national hackathon within the month of October?`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi select options={[
+                    {'text':'Select' , 'value':''} ,
+                    {'text':'Yes' , 'value':'Yes'} ,
+                    {'text':'No' , 'value':'No'} ,
+                ]}/>
+                </SectionUI>
+                </QWrapper>
+                
+                <QWrapper q='25'>
+                <TextUi 
+                text={`Any specific time constraints?`}
+                heading='h6'
+                funcss='question'
+                />
+                <SectionUI gap={1}>
+                <InputUi label={'Select Answer'} />
+                </SectionUI>
+                </QWrapper>
 
                 </div>
         }
