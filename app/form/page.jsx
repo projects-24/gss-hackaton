@@ -263,6 +263,8 @@ export default function Form() {
             status && <Alert type={status} message={message} fixed='top-middle' animation='SlideDown' standard/>
         }
         <div className='width-600-max fit center padding-top-50'>
+       <RowFlexUi gap={2} justify='space-between'>
+        <div>
         <RowFlexUi gap={1} >
             <CircleUi bg='dark900' size={4}>
                 <img src='/gss.png' className='width-50'/>
@@ -274,18 +276,22 @@ export default function Form() {
             <img src='/gss.png' className='width-50'/>
             </CircleUi>
         </RowFlexUi>
-        <SectionUI gap={1} />
-        <TextUi heading='h4' text='2024 GSS HACKATHON REGISTERATION' color='dark200'/>
-        <SectionUI gap={2} />
+        </div>
+        <img src="/hackathon.png" width={'150px'} alt="" />
+       </RowFlexUi>
+        <SectionUI gap={2} >
+        <RowFlexUi gap={3} justify='space-between'>
+        <TextUi heading='h6' text='2024 GSS HACKATHON REGISTERATION' color='dark200'/>
         <TextUi 
-        heading={'h1'}
+        heading={'h6'}
         color='p'
+        bold
         text={<span>
             {page} / {total_pages}
         </span>}
         />
-        <SectionUI />
-
+        </RowFlexUi>
+        </SectionUI>
         {
             page == 1 &&
         <QWrapper>
